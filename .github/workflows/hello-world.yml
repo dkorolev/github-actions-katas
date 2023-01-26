@@ -1,14 +1,19 @@
-name: Clone + Build + Upload = Java CI
+name: Java CI
 on: push
 jobs:
   clone:
-    name: Initial Clone
+    name: Clone & Package
     runs-on: ubuntu-latest
     steps:
-      - name: Clone
+      - name: Clone Code
         uses: actions/checkout@v3   
+      - name: Upload Code
+        uses: actions/upload-artifact@v3
+        with: 
+          name: code
+          path: . 
   build:
-    name: Full Build
+    name: Build & Test
     needs: [clone]
     runs-on: ubuntu-latest
     container: gradle:6-jdk11
@@ -22,8 +27,3 @@ jobs:
         run: chmod +x ci/build-app.sh && ci/build-app.sh
       - name: Test
         run: chmod +x ci/unit-test-app.sh && ci/unit-test-app.sh
-      - name: Upload
-        uses: actions/upload-artifact@v3
-        with: 
-          name: code
-          path: .
