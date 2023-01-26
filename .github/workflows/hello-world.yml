@@ -1,4 +1,4 @@
-name: Clone + Build + Upload = Java CI
+name: hello-world  # Clone + Build + Upload = Java CI
 on: push
 jobs:
   clone:
