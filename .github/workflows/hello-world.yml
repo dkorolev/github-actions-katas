@@ -1,13 +1,23 @@
-name: hello-world
+name: Clone + Build + Upload = Java CI
 on: push
 jobs:
-  my-job:
+  clone:
+    name: Initial Clone
     runs-on: ubuntu-latest
-    container: gradle:6-jdk11
-    name: Clone + Build + Upload
     steps:
       - name: Clone
         uses: actions/checkout@v3   
+  build:
+    name: Full Build
+    needs: [clone]
+    runs-on: ubuntu-latest
+    container: gradle:6-jdk11
+    steps:
+      - name: Download Code
+        uses: actions/download-artifact@v3
+        with:
+          name: code
+          path: .
       - name: Build
         run: chmod +x ci/build-app.sh && ci/build-app.sh
       - name: Test
