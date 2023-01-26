@@ -4,7 +4,7 @@ jobs:
   my-job:
     runs-on: ubuntu-latest
     container: gradle:6-jdk11
-    name: Clone + Build
+    name: Clone + Build + Upload
     steps:
       - name: Clone
         uses: actions/checkout@v3   
