@@ -23,7 +23,9 @@ jobs:
         with:
           name: code
           path: .
-      - name: Build
+      - name: Build Code
         run: chmod +x ci/build-app.sh && ci/build-app.sh
       - name: Test
         run: chmod +x ci/unit-test-app.sh && ci/unit-test-app.sh
+      - name: Build Docker
+        run: chmod +x ci/build-docker.sh && ci/build-docker.sh
