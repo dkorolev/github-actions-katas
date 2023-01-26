@@ -3,7 +3,10 @@ on: push
 jobs:
   my-job:
     runs-on: ubuntu-latest
-    name: My Job as YML
+    container: gradle:6-jdk11
+    name: Clone + Build
     steps:
-      - name: my-step
-        run: echo "Hello World!"
+      - name: Clone
+        uses: actions/checkout@v3   
+      - name: Build
+        run: ci/build-app.sh
